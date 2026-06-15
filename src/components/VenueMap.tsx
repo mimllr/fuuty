@@ -10,6 +10,18 @@ import styles from './VenueMap.module.css'
 export const MAP_HEIGHT = 300
 const FOCUS_ZOOM = 10
 
+const MAP_FLY_OPTIONS: L.ZoomPanOptions = {
+  duration: 0.9,
+  easeLinearity: 0.22,
+}
+
+const MAP_FIT_OPTIONS: L.FitBoundsOptions = {
+  padding: [24, 24],
+  maxZoom: 5,
+  duration: 0.9,
+  easeLinearity: 0.22,
+}
+
 export interface MapViewState {
   mode: 'default' | 'focus'
   stadiumId?: string
@@ -60,10 +72,16 @@ function fitDefaultBounds(map: L.Map, boundsKey: string) {
 
   if (positions.length === 0) return
   if (positions.length === 1) {
-    map.setView(positions[0], 6, { animate: true })
+    map.flyTo(positions[0], 6, MAP_FLY_OPTIONS)
     return
   }
-  map.fitBounds(positions, { padding: [24, 24], maxZoom: 5, animate: true })
+  map.flyToBounds(positions, MAP_FIT_OPTIONS)
+}
+
+function focusStadium(map: L.Map, stadiumId: string) {
+  const coords = STADIUM_COORDS[stadiumId]
+  if (!coords) return
+  map.flyTo([coords.lat, coords.lng], FOCUS_ZOOM, MAP_FLY_OPTIONS)
 }
 
 function MapViewController({
@@ -77,10 +95,7 @@ function MapViewController({
 
   useEffect(() => {
     if (mapView.mode === 'focus' && mapView.stadiumId) {
-      const coords = STADIUM_COORDS[mapView.stadiumId]
-      if (coords) {
-        map.setView([coords.lat, coords.lng], FOCUS_ZOOM, { animate: true })
-      }
+      focusStadium(map, mapView.stadiumId)
       return
     }
 
