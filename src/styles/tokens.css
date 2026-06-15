@@ -1,0 +1,25 @@
+:root {
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #5c5c5c;
+  --color-border: #e0e0e0;
+  --color-live: #1b7a3d;
+  --color-live-bg: #e8f5ec;
+
+  --font-body: 18px;
+  --font-secondary: 16px;
+  --font-team: 22px;
+  --font-score: 28px;
+  --font-heading: 20px;
+
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+
+  --tap-target: 48px;
+  --nav-height: 64px;
+  --radius: 12px;
+}

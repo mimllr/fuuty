@@ -1,0 +1,60 @@
+.bracket {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.roundTitle {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-heading);
+  font-weight: 700;
+}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.match {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: 6px;
+}
+
+.team {
+  font-size: var(--font-body);
+  font-weight: 600;
+}
+
+.placeholder {
+  font-style: italic;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.score {
+  font-size: var(--font-team);
+  font-weight: 700;
+}
+
+.meta {
+  margin-top: var(--space-xs);
+  font-size: var(--font-secondary);
+  color: var(--color-text-secondary);
+}
+
+.empty {
+  margin: var(--space-xl) 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}

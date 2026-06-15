@@ -1,0 +1,31 @@
+.navigator {
+  display: grid;
+  grid-template-columns: var(--tap-target) 1fr var(--tap-target);
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: 32px;
+  line-height: 1;
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.date {
+  text-align: center;
+  font-size: var(--font-heading);
+  font-weight: 600;
+}

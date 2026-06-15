@@ -1,0 +1,17 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.nav {
+  height: var(--tap-target);
+}
+
+.map {
+  height: 300px;
+}
+
+.card {
+  height: 140px;
+}

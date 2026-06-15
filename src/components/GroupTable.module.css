@@ -1,0 +1,63 @@
+.card {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.title {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-heading);
+  font-weight: 700;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-secondary);
+}
+
+.table th,
+.table td {
+  padding: 8px 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  text-align: left;
+}
+
+.table th {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.teamCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flag {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.flagPlaceholder {
+  width: 24px;
+  height: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.points {
+  font-weight: 700;
+}
