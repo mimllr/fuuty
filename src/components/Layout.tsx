@@ -1,7 +1,10 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import { TeamSelectionProvider, useTeamSelection } from '../context/TeamSelectionContext'
 import styles from './BottomNav.module.css'
 
-export function BottomNav() {
+function BottomNav() {
+  const { selectedTeamCode } = useTeamSelection()
+
   return (
     <nav className={styles.nav} aria-label="Main navigation">
       <NavLink
@@ -21,15 +24,25 @@ export function BottomNav() {
       >
         Standings
       </NavLink>
+      <NavLink
+        to="/team"
+        className={({ isActive }) =>
+          isActive ? `${styles.link} ${styles.active}` : styles.link
+        }
+      >
+        Team ({selectedTeamCode})
+      </NavLink>
     </nav>
   )
 }
 
 export function Layout() {
   return (
-    <div className="app-shell">
-      <Outlet />
-      <BottomNav />
-    </div>
+    <TeamSelectionProvider>
+      <div className="app-shell">
+        <Outlet />
+        <BottomNav />
+      </div>
+    </TeamSelectionProvider>
   )
 }

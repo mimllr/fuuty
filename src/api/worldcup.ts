@@ -275,6 +275,17 @@ export function getMatchesForDate(
     .sort((a, b) => a.kickoffUtc.getTime() - b.kickoffUtc.getTime())
 }
 
+export function getMatchesForTeam(
+  matches: NormalizedMatch[],
+  teamId: string,
+): NormalizedMatch[] {
+  return matches
+    .filter(
+      (match) => match.homeTeamId === teamId || match.awayTeamId === teamId,
+    )
+    .sort((a, b) => a.kickoffUtc.getTime() - b.kickoffUtc.getTime())
+}
+
 export function getMatchDates(matches: NormalizedMatch[]): string[] {
   const dates = new Set(matches.map((match) => match.localDateKey))
   return Array.from(dates).sort()
@@ -288,6 +299,14 @@ export function formatKickoffTime(date: Date): string {
   return new Intl.DateTimeFormat(undefined, {
     hour: 'numeric',
     minute: '2-digit',
+  }).format(date)
+}
+
+export function formatMatchDateShort(date: Date): string {
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
   }).format(date)
 }
 

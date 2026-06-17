@@ -1,5 +1,5 @@
 import type { ApiTeam } from '../api/types'
-import { formatKickoffTime } from '../api/worldcup'
+import { formatKickoffTime, formatMatchDateShort } from '../api/worldcup'
 import type { NormalizedMatch } from '../api/types'
 import styles from './MatchCard.module.css'
 
@@ -8,6 +8,7 @@ interface MatchCardProps {
   teams: Map<string, ApiTeam>
   isFocused?: boolean
   onSelect?: () => void
+  showDate?: boolean
 }
 
 function getFlag(
@@ -26,19 +27,34 @@ function isPlaceholder(name: string, label?: string): boolean {
   return Boolean(label) || name === 'TBD' || name.startsWith('Winner') || name.startsWith('Runner') || name.startsWith('Loser') || name.startsWith('3rd')
 }
 
-function StatusBadge({ match }: { match: NormalizedMatch }) {
+function StatusBadge({
+  match,
+  showDate = false,
+}: {
+  match: NormalizedMatch
+  showDate?: boolean
+}) {
+  const datePrefix = showDate
+    ? `${formatMatchDateShort(match.kickoffUtc)} · `
+    : ''
+
   if (match.status === 'live') {
     const minute =
       match.timeElapsed && match.timeElapsed !== 'finished'
         ? match.timeElapsed
         : 'Live'
-    return <span className={`${styles.badge} ${styles.live}`}>Live {minute}</span>
+    return (
+      <span className={`${styles.badge} ${styles.live}`}>
+        {datePrefix}Live {minute}
+      </span>
+    )
   }
   if (match.status === 'finished') {
-    return <span className={styles.badge}>Final</span>
+    return <span className={styles.badge}>{datePrefix}Final</span>
   }
   return (
     <span className={styles.badge}>
+      {datePrefix}
       {formatKickoffTime(match.kickoffUtc)}
     </span>
   )
@@ -49,6 +65,7 @@ export function MatchCard({
   teams,
   isFocused = false,
   onSelect,
+  showDate = false,
 }: MatchCardProps) {
   const homeFlag = getFlag(match.homeTeamId, match.homeTeamName, teams)
   const awayFlag = getFlag(match.awayTeamId, match.awayTeamName, teams)
@@ -84,7 +101,7 @@ export function MatchCard({
       tabIndex={onSelect ? 0 : undefined}
     >
       <div className={styles.header}>
-        <StatusBadge match={match} />
+        <StatusBadge match={match} showDate={showDate} />
         {match.type !== 'group' && (
           <span className={styles.stage}>{match.group}</span>
         )}

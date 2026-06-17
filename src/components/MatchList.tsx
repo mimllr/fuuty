@@ -8,6 +8,8 @@ interface MatchListProps {
   teams: Map<string, ApiTeam>
   focusedStadiumId?: string
   onSelectMatch?: (stadiumId: string) => void
+  showDate?: boolean
+  emptyMessage?: string
 }
 
 export function MatchList({
@@ -15,11 +17,11 @@ export function MatchList({
   teams,
   focusedStadiumId,
   onSelectMatch,
+  showDate = false,
+  emptyMessage = 'No matches scheduled for this day.',
 }: MatchListProps) {
   if (matches.length === 0) {
-    return (
-      <p className={styles.empty}>No matches scheduled for this day.</p>
-    )
+    return <p className={styles.empty}>{emptyMessage}</p>
   }
 
   return (
@@ -30,6 +32,7 @@ export function MatchList({
           match={match}
           teams={teams}
           isFocused={focusedStadiumId === match.stadiumId}
+          showDate={showDate}
           onSelect={
             onSelectMatch
               ? () => onSelectMatch(match.stadiumId)

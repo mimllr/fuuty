@@ -7,7 +7,7 @@ import { formatKickoffTime } from '../api/worldcup'
 import { STADIUM_COORDS } from '../data/stadium-coords'
 import styles from './VenueMap.module.css'
 
-export const MAP_HEIGHT = 300
+export const MAP_HEIGHT = 240
 const FOCUS_ZOOM = 10
 
 const MAP_FLY_OPTIONS: L.ZoomPanOptions = {
